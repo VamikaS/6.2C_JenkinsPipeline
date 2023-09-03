@@ -72,12 +72,6 @@ pipeline {
                 }
             }
    post {
-      /*  always {
-            // Archive logs as artifacts
-            archiveArtifacts artifacts: '**/logs/*', allowEmptyArchive: true
-        }
-        */
-        
         failure {
                 mail to: "valour2417@gmail.com",
                      subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
