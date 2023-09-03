@@ -49,7 +49,7 @@ pipeline {
             }
         }
        success { 
-                mail to: "valour2417@gmail.com"
+                mail to: "valour2417@gmail.com",
                      subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
                      body: "Pipeline succeeded. Logs attached."
         }
