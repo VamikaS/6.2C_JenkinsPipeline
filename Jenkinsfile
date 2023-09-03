@@ -31,7 +31,6 @@ pipeline {
                      }
                 }
             }
-        }
 
         stage('Security Scan') {
             steps {
@@ -47,7 +46,6 @@ pipeline {
                      subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
                      body: "Pipeline failed. Check logs for details."
             }
-        }
        success { 
                 mail to: "valour2417@gmail.com",
                      subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
