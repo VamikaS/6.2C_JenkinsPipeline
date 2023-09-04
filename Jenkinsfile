@@ -55,14 +55,14 @@ pipeline {
     post {
        
         failure {
-                mail from: "valour2417@gmail.com";
+                mail from: "valour2417@gmail.com",
                      to: "valour2417@gmail.com",
                      subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
                      body: "Pipeline failed. Check logs for details."
                      attachmentsPattern: '**/output.log' // Attach the output.log file on failure
             }
        success { 
-                mail from: "valour2417@gmail.com";
+                mail from: "valour2417@gmail.com",
                      to: "valour2417@gmail.com",
                      subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
                      body: "Pipeline succeeded. Logs attached."
@@ -90,7 +90,7 @@ pipeline {
             }
    post {
         failure {
-                mail from: "valour2417@gmail.com";
+                mail from: "valour2417@gmail.com",
                      to: "valour2417@gmail.com",
                      subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
                      body: "Pipeline failed. Check logs for details."
@@ -98,7 +98,7 @@ pipeline {
             }
         
         success { 
-                mail from: "valour2417@gmail.com";
+                mail from: "valour2417@gmail.com",
                      to: "valour2417@gmail.com",
                      subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
                      body: "Pipeline succeeded. Logs attached."
