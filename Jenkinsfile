@@ -35,7 +35,7 @@ pipeline {
         stage('Security Scan') {
             steps {
                 script {
-                    echo "Performing security scan..."
+                    echo "Performing security scan using OWASP ZAP..."
                     // Integrate a security scanning tool (e.g., OWASP ZAP) using Jenkins plugins
                 }
             }
@@ -58,7 +58,7 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 script {
-                    echo "Deploying to staging server (e.g., AWS EC2 instance)..."
+                    echo "Deploying to staging server AWS EC2 instance..."
                     // Use a deployment script or tool to deploy to staging
                 }
             }
@@ -89,7 +89,7 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 script {
-                    echo "Deploying to production server (e.g., AWS EC2 instance)..."
+                    echo "Deploying to production server AWS EC2 instance..."
                     // Use a deployment script or tool to deploy to production
                 }
             }
