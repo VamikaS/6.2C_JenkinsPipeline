@@ -19,7 +19,9 @@ pipeline {
             }
             post {
                 success{
-                    archiveArtifacts '**/output.log', allowEmptyArchive: true
+                    script{
+                        archiveArtifacts '**/output.log', allowEmptyArchive: true
+                    }
                 }
             }
         }
@@ -55,18 +57,22 @@ pipeline {
     post {
        
         failure {
-                mail from: "valour2417@gmail.com",
+            script{
+                 mail from: "valour2417@gmail.com",
                      to: "valour2417@gmail.com",
                      subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
                      body: "Pipeline failed. Check logs for details."
                      attachmentsPattern: '**/output.log' // Attach the output.log file on failure
             }
+        }
        success { 
+           script{
                 mail from: "valour2417@gmail.com",
                      to: "valour2417@gmail.com",
                      subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
                      body: "Pipeline succeeded. Logs attached."
                      attachmentsPattern: '**/output.log' // Attach the output.log file on success
+           }
         }
     }
 
@@ -90,19 +96,23 @@ pipeline {
             }
    post {
         failure {
-                mail from: "valour2417@gmail.com",
+            script{
+                 mail from: "valour2417@gmail.com",
                      to: "valour2417@gmail.com",
                      subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
                      body: "Pipeline failed. Check logs for details."
                      attachmentsPattern: '**/output.log' // Attach the output.log file on failure
-            }
+            }    
+        }
         
         success { 
-                mail from: "valour2417@gmail.com",
+            script{
+                 mail from: "valour2417@gmail.com",
                      to: "valour2417@gmail.com",
                      subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
                      body: "Pipeline succeeded. Logs attached."
                      attachmentsPattern: '**/output.log' // Attach the output.log file on success
+            }
         }
     }
 
