@@ -2,11 +2,24 @@ pipeline {
     agent any
 
     stages {
+         stage('Generate Output Log') {
+            steps {
+                script {
+                    // Create and write to the output.log file
+                    sh 'echo "This is the content of the output.log" > output.log'
+                }
+            }
+        }
         stage('Build') {
             steps {
                 script {
                     echo "Building the code using Maven..."
                     // Use Maven to compile and package the code
+                }
+            }
+            post {
+                success{
+                    archiveArtifacts '**/output.log', allowEmptyArchive: true
                 }
             }
         }
@@ -45,11 +58,13 @@ pipeline {
                 mail to: "valour2417@gmail.com",
                      subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
                      body: "Pipeline failed. Check logs for details."
+                     attachmentsPattern: '**/output.log' // Attach the output.log file on failure
             }
        success { 
                 mail to: "valour2417@gmail.com",
                      subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
                      body: "Pipeline succeeded. Logs attached."
+                     attachmentsPattern: '**/output.log' // Attach the output.log file on success
         }
     }
 
@@ -76,12 +91,14 @@ pipeline {
                 mail to: "valour2417@gmail.com",
                      subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
                      body: "Pipeline failed. Check logs for details."
+                     attachmentsPattern: '**/output.log' // Attach the output.log file on failure
             }
         
         success { 
                 mail to: "valour2417@gmail.com",
                      subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
                      body: "Pipeline succeeded. Logs attached."
+                     attachmentsPattern: '**/output.log' // Attach the output.log file on success
         }
     }
 
