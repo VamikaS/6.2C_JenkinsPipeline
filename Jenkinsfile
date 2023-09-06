@@ -2,26 +2,11 @@ pipeline {
     agent any
 
     stages {
-         stage('Generate Output Log') {
-            steps {
-                script {
-                    // Create and write to the output.log file
-                    sh 'echo "This is the content of the output.log" > output.log'
-                }
-            }
-        }
         stage('Build') {
             steps {
                 script {
                     echo "Building the code using Maven..."
                     // Use Maven to compile and package the code
-                }
-            }
-            post {
-                success{
-                    script{
-                        archiveArtifacts '**/output.log', allowEmptyArchive: true
-                    }
                 }
             }
         }
@@ -58,20 +43,20 @@ pipeline {
        
         failure {
             script{
-                 mail from: "valour2417@gmail.com",
-                     to: "valour2417@gmail.com",
+                // mail from: "valour2417@gmail.com",
+                     emailext attachLog: true,   
                      subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
-                     body: "Pipeline failed. Check logs for details."
-                     attachmentsPattern: '**/output.log' // Attach the output.log file on failure
+                     body: "Pipeline failed. Check logs for details.",
+                     to: "valour2417@gmail.com" 
             }
         }
        success { 
            script{
-                mail from: "valour2417@gmail.com",
-                     to: "valour2417@gmail.com",
+                //mail from: "valour2417@gmail.com",
+                     emailext attachLog: true,
                      subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
-                     body: "Pipeline succeeded. Logs attached."
-                     attachmentsPattern: '**/output.log' // Attach the output.log file on success
+                     body: "Pipeline succeeded. Logs attached.",
+                     to: '$DEFAULT_RECIPIENTS' //"valour2417@gmail.com" 
            }
         }
     }
@@ -97,21 +82,21 @@ pipeline {
    post {
         failure {
             script{
-                 mail from: "valour2417@gmail.com",
-                     to: "valour2417@gmail.com",
+                // mail from: "valour2417@gmail.com",
+                     emailext attachLog: true,
                      subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
-                     body: "Pipeline failed. Check logs for details."
-                     attachmentsPattern: '**/output.log' // Attach the output.log file on failure
+                     body: "Pipeline failed. Check logs for details.",
+                     to: '$DEFAULT_RECIPIENTS' 
             }    
         }
         
         success { 
             script{
-                 mail from: "valour2417@gmail.com",
-                     to: "valour2417@gmail.com",
+                // mail from: "valour2417@gmail.com",
+                     emailext attachLog: true,
                      subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
-                     body: "Pipeline succeeded. Logs attached."
-                     attachmentsPattern: '**/output.log' // Attach the output.log file on success
+                     body: "Pipeline succeeded. Logs attached.",
+                     to: '$DEFAULT_RECIPIENTS' //"valour2417@gmail.com"
             }
         }
     }
