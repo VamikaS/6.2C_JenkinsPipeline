@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo "Building the code using Maven..."
+                    echo "Building the code using Maven tools..."
                     // Use Maven to compile and package the code
                 }
             }
